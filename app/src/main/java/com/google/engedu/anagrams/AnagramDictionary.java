@@ -40,6 +40,7 @@ public class AnagramDictionary {
             if (lettersToWord.containsKey(sortWord(word))){
                 temp_array = lettersToWord.get(sortWord(word));
                 temp_array.add(word);
+                //lettersToWord.put(sortWord(word),temp_array);
             }
             else{
                 temp_array.add(word);
@@ -57,7 +58,7 @@ public class AnagramDictionary {
     }
 
     public boolean isGoodWord(String word, String base) {
-        if (!wordSet.contains(word)){
+        if (!wordSet.contains(word) && word.contains(base)){
             return false;
         }
         if (word.contains(base)){
@@ -92,7 +93,8 @@ public class AnagramDictionary {
     }
 
     public String pickGoodStarterWord() {
-        int maxLength = wordList.size();
+        ArrayList<String> wordArray = sizeToWords.get(Math.min(MAX_WORD_LENGTH, wordLength));
+        int maxLength = wordArray.size();
         int num = random.nextInt(maxLength), loopIndex;
         String key;
         for (loopIndex = num; loopIndex < (maxLength + num + 1);loopIndex++ ){
